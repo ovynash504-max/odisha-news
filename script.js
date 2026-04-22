@@ -1,13 +1,14 @@
 const apiKey = "2e1a0bb9e3e8661701ea292d24bd11ce";
 
 async function getNews() {
-  let url = `https://gnews.io/api/v4/search?q=odisha&lang=en&max=10&token=${apiKey}`;
+  const baseUrl = "https://gnews.io/api/v4/search";
+  const query = "odisha";
+
+  const finalUrl = `https://api.allorigins.win/raw?url=${baseUrl}?q=${query}&lang=en&max=10&token=${apiKey}`;
 
   try {
-    let res = await fetch(url);
+    let res = await fetch(finalUrl);
     let data = await res.json();
-
-    console.log(data);
 
     let container = document.getElementById("news");
 
@@ -27,6 +28,7 @@ async function getNews() {
 
   } catch (error) {
     document.getElementById("news").innerHTML = "<h2>Error loading news</h2>";
+    console.log(error);
   }
 }
 
